@@ -10,13 +10,17 @@
 format_model <- function(model) {
   info <- insight::model_info(model)
 
-  type <- ""
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
+    type <- "constant (intercept-only) "
+  } else {
+    type <- ""
+  }
 
   if (info$is_bayesian) {
     type <- paste0(type, "Bayesian ")
   }
 
-  if (info$is_zeroinf) {
+  if (info$is_zero_inflated) {
     type <- paste0(type, "zero-inflated ")
   }
   # TODO: hurdle?
@@ -48,5 +52,5 @@ format_model <- function(model) {
     )
   }
 
-  return(type)
+  type
 }
