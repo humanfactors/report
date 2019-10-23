@@ -2,50 +2,51 @@
 % Please edit documentation in R/report.merMod.R
 \name{report.lmerMod}
 \alias{report.lmerMod}
-\alias{report.merMod}
 \title{Mixed Models Report}
 \usage{
-\method{report}{lmerMod}(model, ci = 0.95, standardize = TRUE,
-  effsize = "cohen1988", performance_in_table = TRUE,
-  performance_metrics = "all", bootstrap = FALSE, p_method = "wald",
-  ci_method = "wald", ...)
-
-\method{report}{merMod}(model, ci = 0.95, standardize = TRUE,
-  effsize = "chen2010", performance_in_table = TRUE,
-  performance_metrics = "all", bootstrap = FALSE, ci_method = "wald",
-  ...)
+\method{report}{lmerMod}(model, effsize = "default", ci = 0.95,
+  standardize = "refit", standardize_robust = FALSE,
+  bootstrap = FALSE, iterations = 500, performance_metrics = "all",
+  p_method = "wald", ci_method = "wald", ...)
 }
 \arguments{
-\item{model}{Mixed model.}
+\item{model}{Model object.}
+
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[=parameters_bootstrap]{parameters_bootstrap()}}).}
 
-\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
-
-\item{performance_in_table}{Add performance metrics in table.}
+\item{iterations}{The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{p_method}{Method for computing p values. See \code{\link[=p_value]{p_value()}}.}
 
-\item{p_method}{Method for computing p values. See \link{p_value}.}
-
-\item{ci_method}{Method for computing confidence intervals (CI). See \link{ci}.}
+\item{ci_method}{Method for computing confidence intervals (CI). See \code{\link[=ci]{ci()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Create a report of a mixed model.
+Create a report of a mixed model (lme4).
 }
 \examples{
-\dontrun{
+library(lme4)
+library(report)
+
 model <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 r <- report(model)
 to_text(r)
 to_fulltext(r)
 to_table(r)
 to_fulltable(r)
-}
+
+
+model <- glmer(vs ~ disp + (1 | am), data = mtcars, family = "binomial")
+r <- report(model)
+to_text(r)
+to_fulltext(r)
+to_table(r)
+to_fulltable(r)
 }

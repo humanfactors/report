@@ -23,33 +23,32 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-	insight,
-	parameters,
-	performance,
-	bayestestR,
-	correlation,
-	estimate,
-	dplyr
+	insight (>= 0.5.0),
+	bayestestR (>= 0.2.5),
+	performance (>= 0.3.0),
+	parameters (>= 0.1.0),
+	stats,
+	utils,
+	dplyr,
+	magrittr
 Suggests:
-	spelling,
 	knitr,
+	lavaan,
 	rmarkdown,
 	testthat,
 	covr,
-	circus,
+	correlation,
+	estimate,
 	ggplot2,
+	lme4,
+	logspline,
 	rstudioapi,
 	rstanarm,
 	BayesFactor,
 	caret,
 	randomForest
-Remotes: 
-	easystats/insight,
-	easystats/parameters,
-	easystats/performance,
-	easystats/bayestestR,
+Remotes:
 	easystats/correlation,
-	easystats/estimate,
-	easystats/circus
+	easystats/estimate
 RoxygenNote: 6.1.1
 Language: en-GB
