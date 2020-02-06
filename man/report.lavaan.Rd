@@ -4,8 +4,14 @@
 \alias{report.lavaan}
 \title{SEM / CFA lavaan Models Report}
 \usage{
-\method{report}{lavaan}(model, effsize = "funder2019", ci = 0.95,
-  standardize = TRUE, performance_metrics = "all", ...)
+\method{report}{lavaan}(
+  model,
+  effsize = "funder2019",
+  ci = 0.95,
+  standardize = TRUE,
+  performance_metrics = "all",
+  ...
+)
 }
 \arguments{
 \item{model}{Model object.}
@@ -14,11 +20,11 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Return standardized parameters (standardized coefficients). See \code{lavaan::standardizedsolution}.}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
 \description{
 Create a report of a lavaan model.

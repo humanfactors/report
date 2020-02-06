@@ -4,12 +4,23 @@
 \alias{report.stanreg}
 \title{Bayesian Models Report}
 \usage{
-\method{report}{stanreg}(model, effsize = "default", ci = 0.89,
-  standardize = "smart", standardize_robust = FALSE,
-  centrality = "median", dispersion = FALSE, ci_method = "hdi",
-  test = c("pd", "rope"), rope_range = "default", rope_ci = 1,
-  bf_prior = NULL, diagnostic = c("ESS", "Rhat"),
-  performance_metrics = "all", ...)
+\method{report}{stanreg}(
+  model,
+  effsize = "default",
+  ci = 0.89,
+  standardize = "smart",
+  standardize_robust = FALSE,
+  centrality = "median",
+  dispersion = FALSE,
+  ci_method = "hdi",
+  test = c("pd", "rope"),
+  rope_range = "default",
+  rope_ci = 1,
+  bf_prior = NULL,
+  diagnostic = c("ESS", "Rhat"),
+  performance_metrics = "all",
+  ...
+)
 }
 \arguments{
 \item{model}{Model object.}
@@ -18,13 +29,16 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
+
 \item{centrality}{The point-estimates (centrality indices) to compute.  Character (vector) or list with one or more of these options: \code{"median"}, \code{"mean"}, \code{"MAP"} or \code{"all"}.}
 
 \item{dispersion}{Logical, if \code{TRUE}, computes indices of dispersion related to the estimate(s) (\code{SD} and \code{MAD} for \code{mean} and \code{median}, respectively).}
 
 \item{ci_method}{The type of index used for Credible Interval. Can be
-\code{"HDI"} (default, see \code{\link[bayestestR:hdi]{hdi}}) or \code{"ETI"}
-(see \code{\link[bayestestR:eti]{eti}}).}
+\code{"HDI"} (default, see \code{\link[bayestestR:hdi]{hdi}}), \code{"ETI"}
+(see \code{\link[bayestestR:eti]{eti}}) or \code{"SI"}
+(see \code{\link[bayestestR:si]{si}}).}
 
 \item{test}{The indices of effect existence to compute. Character (vector) or
 list with one or more of these options: \code{"p_direction"} (or \code{"pd"}),
@@ -41,13 +55,13 @@ the bounds are set to \code{x +- 0.1*SD(response)}.}
 \item{rope_ci}{The Credible Interval (CI) probability, corresponding to the
 proportion of HDI, to use for the percentage in ROPE.}
 
-\item{bf_prior}{Distribution representing a prior for the computation of Bayes factors. Used if the input is a posterior, otherwise (in the case of models) ignored.}
+\item{bf_prior}{Distribution representing a prior for the computation of Bayes factors / SI. Used if the input is a posterior, otherwise (in the case of models) ignored.}
 
 \item{diagnostic}{Diagnostic metrics to compute.  Character (vector) or list with one or more of these options: \code{"ESS"}, \code{"Rhat"}, \code{"MCSE"} or \code{"all"}.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
 \description{
 Create a report of Bayesian models.

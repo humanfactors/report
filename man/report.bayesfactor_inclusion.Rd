@@ -4,13 +4,10 @@
 \alias{report.bayesfactor_inclusion}
 \title{Inclusion Bayes factor Report}
 \usage{
-\method{report}{bayesfactor_inclusion}(model, rules = "jeffreys1961",
-  ...)
+\method{report}{bayesfactor_inclusion}(model, rules = "jeffreys1961", ...)
 }
 \arguments{
 \item{model}{Object of class \code{bayesfactor_inclusion}.}
-
-\item{rules}{Can be "jeffreys1961" (default), "raftery1995" or custom set of \code{\link{rules}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

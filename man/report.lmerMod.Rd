@@ -4,10 +4,19 @@
 \alias{report.lmerMod}
 \title{Mixed Models Report}
 \usage{
-\method{report}{lmerMod}(model, effsize = "default", ci = 0.95,
-  standardize = "refit", standardize_robust = FALSE,
-  bootstrap = FALSE, iterations = 500, performance_metrics = "all",
-  p_method = "wald", ci_method = "wald", ...)
+\method{report}{lmerMod}(
+  model,
+  effsize = "default",
+  ci = 0.95,
+  standardize = "refit",
+  standardize_robust = FALSE,
+  bootstrap = FALSE,
+  iterations = 500,
+  performance_metrics = "all",
+  p_method = "wald",
+  ci_method = "wald",
+  ...
+)
 }
 \arguments{
 \item{model}{Model object.}
@@ -16,17 +25,15 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[=parameters_bootstrap]{parameters_bootstrap()}}).}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
+
+\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:parameters_bootstrap]{parameters_bootstrap()}}).}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{p_method}{Method for computing p values. See \code{\link[=p_value]{p_value()}}.}
-
-\item{ci_method}{Method for computing confidence intervals (CI). See \code{\link[=ci]{ci()}}.}
-
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
 \description{
 Create a report of a mixed model (lme4).
